@@ -11,9 +11,7 @@ var listingSchema = new Schema({
   code: {
     type: String, required: true
   },
-  address: {
-    type: String, required: true
-  },
+  address: String,
   coordinates: {
     latitude: Number,
     longitude: Number
