@@ -10,6 +10,9 @@ var fs = require('fs'),
     config = require('./config.js');
 
 
+var database = mongoose.connection;
+database.on('error', console.error.bind(console, 'database connection error'));
+
 /* Connect to your database */
 mongoose.connect(config.db.uri);
 
@@ -24,16 +27,13 @@ fs.readFile('listings.json', 'utf8', function(err, data) {
   var listings = JSON.parse(data);
 
 /* create a new object for each entry and then save it to the database */
-  listings.entries.forEach(
-    function(listing) {
+  listings.entries.forEach(function(listing) {
       var model = new Listing(listing);
       model.save(function(err) {
         if (err) throw err;
     });
   });
 });
-
-process.exit();
 
 /*
   Once you've written + run the script, check out your MongoLab database to ensure that

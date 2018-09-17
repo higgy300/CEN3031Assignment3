@@ -5,17 +5,17 @@ var mongoose = require('mongoose'),
 /* Create your schema */
 var listingSchema = new Schema({
   /* your code here */
-  name: {
-    type: String, required: true
-  },
   code: {
     type: String, required: true
   },
-  address: String,
+  name: {
+    type: String, required: true
+  },
   coordinates: {
     latitude: Number,
     longitude: Number
   },
+  address: String,
   created_at: Date,
   updated_at: Date
 });
