@@ -1,7 +1,9 @@
 /* Fill out these functions using Mongoose queries*/
 var mongoose = require('mongoose'),
-  Listing = require('./ListingsSchema.js'),
+  Listing = require('./ListingSchema.js'),
   config = require('./config.js');
+
+mongoose.connect(config.db.uri);
 
 var findLibraryWest = function() {
   /*
@@ -10,7 +12,7 @@ var findLibraryWest = function() {
    */
    Listing.findOne(
      {name: 'Library West'}, function(err, data) {
-       if err throw err;
+       if (err) throw err;
        console.log(data);
      });
 };
@@ -22,9 +24,9 @@ var removeCable = function() {
    */
    Listing.findOne(
      {code: 'CABL'}, function(err, data) {
-       if err throw err;
+       if (err) throw err;
        data.remove(function(err) {
-         if err throw err;
+         if (err) throw err;
          console.log(data);
        });
      });
@@ -34,12 +36,12 @@ var updatePhelpsLab = function() {
     Phelps Laboratory's address is incorrect. Find the listing, update it, and then
     log the updated document to the console.
    */
-   Listings.findOne(
+   Listing.findOne(
      {name: 'Phelps Laboratory'}, function(err, data) {
-       if err throw err;
+       if (err) throw err;
        data.address = '1953 Museum Road Gainesville, FL 32611';
        data.save(function(err) {
-         if err throw err;
+         if (err) throw err;
          console.log(data);
        });
      });
@@ -48,10 +50,11 @@ var retrieveAllListings = function() {
   /*
     Retrieve all listings in the database, and log them to the console.
    */
-   Listings.Find{}, function(err, data) {
-     if err throw err;
-     console.log(data);
-   }
+   Listing.find(
+     {}, function(err, data) {
+       if (err) throw err;
+       console.log(data);
+   });
 };
 
 findLibraryWest();
